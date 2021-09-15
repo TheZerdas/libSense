@@ -92,6 +92,7 @@ class process:
             o3d.io.write_point_cloud((self.path + "\\" + str(self.pcdn[:-4]) + "2" + str(self.pcdn[-4:])), pcd_down)
         else:
             o3d.io.write_point_cloud((self.path + "\\" + str(self.pcdn[:-4]) + "1" + str(self.pcdn[-4:])), pcd_down)
+            o3d.io.write_point_cloud((self.path + "\\" + self.pcdn), pcd_down)
         return pcd_down
 
     def load_point_clouds(self):
