@@ -1,0 +1,10 @@
+numpy==1.19.5
+opencv-python==4.5.3.56
+matplotlib==3.3.4
+open3d==0.13.0
+scipy==1.5.4
+scikit-image==0.17.2
+usb==0.0.83.dev0
+pyrealsense2~=2.49.0.3474
+pcl==0.0.0.post1
+imutils==0.5.4
