@@ -1,4 +1,3 @@
-import usb.util
 import open3d as o3d
 import pyrealsense2 as rs
 from numpy import *
@@ -12,25 +11,46 @@ import libSense.get_data as lib
 
 class process:
     r"""
+    Note
+    ----
     setup to process data
-    path, RGB img name and Depth img name + dot + img type,
-    intrinsic, voxel_size, method to create rgbd img
-       e.g. path =(r"C:\Users\Python\Project")
-            RGBimg = "SenseRGB.jpg"
-            Depthimg = "SenseDepth.png"
-            intrinsic = "intrinsic.json" or intrinsic = [[522.259, 0., 330.18],
-                                                         [0., 523.419, 254.437],
-                                                         [0., 0., 1.]]
-            voxel_size = 0.06
-            method to create rgbd img create_from_tum_format
-                options: "tum"
-                         "color_and_depth"
-                         "redwood"
-                         "sun"
+
+    Parameters
+    ----------
+    Path : str
+        directory path
+    RGB_name : str
+        RGB image name
+    Depth_name : str
+        Depth image name
+    intrinsic : string
+        camera intrinsic matrix
+    voxel_size : int, float, double
+        voxel size to voxelization
+    method : str
+        method to create rgbd img
+
+    Examples
+    --------
+    path =(r"C:\Users\Python\Project")
+    RGBimg = "SenseRGB.jpg"
+    Depthimg = "SenseDepth.png"
+    intrinsic = "intrinsic.json" or intrinsic = [[522.259, 0., 330.18],
+                                                 [0., 523.419, 254.437],
+                                                 [0., 0., 1.]]
+    voxel_size = 0.06
+    rgbd_img = tum
+    method to create rgbd img create_from_tum_format
+        options: "tum"
+                 "color_and_depth"
+                 "redwood"
+                 "sun"
     """
     def __init__(self, path = None, RGB_name = None, Depth_name = None, point_cloud_name = None,
                  intrinsic = None, voxel_size = None, rgbd = None):
         r"""
+        Note
+        ----
         Default values:
             Path = current file directory
             RGB_name = "SenseRGB.jpg"
@@ -60,9 +80,11 @@ class process:
 
     def get_point_cloud(self, combine = None):
         r"""
-            from rgb and depth img creates point cloud
-            for use choose: path, rgb_img, depth_img, point_cloud_name.pcd
-            and method to create rgbd img
+        Note
+        ----
+        from rgb and depth img creates point cloud
+        for use choose: path, rgb_img, depth_img, point_cloud_name.pcd
+        and method to create rgbd img
         """
         defcombine = 0
         combine = combine if combine is not None else defcombine
@@ -93,11 +115,14 @@ class process:
         else:
             o3d.io.write_point_cloud((self.path + "\\" + str(self.pcdn[:-4]) + "1" + str(self.pcdn[-4:])), pcd_down)
             o3d.io.write_point_cloud((self.path + "\\" + self.pcdn), pcd_down)
+        # o3d.io.write_point_cloud(self.pcdn, pcd_down)
         return pcd_down
 
     def load_point_clouds(self):
         r"""
-            from path loads two point clouds
+        Note
+        ----
+        from path loads two point clouds
         """
         os.chdir(self.path)
         pcds = []
@@ -154,10 +179,12 @@ class process:
 
     def combine(self):
         r"""
-            loads and combines two point clouds and merge it by calculation
+        Note
+        ----
+        loads and combines two point clouds and merge it by calculation
 
-            for use could be choose: path, rgb_img, depth_img, point_cloud_name.pcd,
-            intrinsic, voxel_size, method to create rgbd img
+        for use could be choose: path, rgb_img, depth_img, point_cloud_name.pcd,
+        intrinsic, voxel_size, method to create rgbd img
         """
         lib.get_data.RGB(self.path, self.RGBn, self.Depthn)
         self.get_point_cloud(combine=1)
@@ -191,8 +218,10 @@ class process:
 
     def kd(self):
         r"""
-            uses mls "smoothing" filter on point cloud
-            for use could be choose: path, point_cloud_name.pcd,
+        Note
+        ----
+        uses mls "smoothing" filter on point cloud
+        for use could be choose: path, point_cloud_name.pcd,
         """
         os.chdir(self.path)
         cloud = pcl.load(str(self.pcdn[:-4]) + "1" + str(self.pcdn[-4:]))
@@ -212,8 +241,10 @@ class process:
 
     def ground_det(self):
         r"""
-            detects ground from point cloud
-            for use choose: path, point_cloud_name.pcd
+        Note
+        ----
+        detects ground from point cloud
+        for use choose: path, point_cloud_name.pcd
         """
         os.chdir(self.path)
         cloud = pcl.load(str(self.pcdn[:-4]) + "1" + str(self.pcdn[-4:]))
@@ -241,8 +272,10 @@ class process:
 
     def canny(self):
         r"""
-            uses on RGB or Depth img canny filter
-            for use choose: path, rgb_img, depth_img
+        Note
+        ----
+        uses on RGB or Depth img canny filter
+        for use choose: path, rgb_img, depth_img
         """
         os.chdir(self.path)
 
