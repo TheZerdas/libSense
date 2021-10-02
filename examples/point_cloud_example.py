@@ -7,7 +7,9 @@ path = (r"C:\Users\Python\....")
 RGBname = "sensergb.jpg"
 Depthname = "senseD.png"
 point_cloud_name = "point_cloud.pcd"
-intrinsic = "intrinsic.json"
+intrinsic = [[522.259, 0., 330.18],
+             [0., 523.419, 254.437],
+             [0., 0., 1.]]
 voxel_size = 0.00006
 # rgbd = "color_and_depth"
 rgbd = "redwood"

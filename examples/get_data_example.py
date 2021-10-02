@@ -6,5 +6,9 @@ RGBname = "sensergb.jpg"
 Depthname = "senseD.png"
 
 # function that gets you RGB and Depth img
-libSense.get_data.RGB(path, RGBname, Depthname)
+data = libSense.get_data(path, RGBname, Depthname)
+# just get data and save it
+libSense.get_data.RGB(data)
+# set live stream with optional save data
+# libSense.get_data.RGBLive(data)
 
