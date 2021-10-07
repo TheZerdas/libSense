@@ -139,6 +139,7 @@ class get_data:
         """
         pipeline = self.startRGB()
         print("Press 's' to save images.")
+        print("Press 'q' to quit.")
         try:
             while True:
 
@@ -174,8 +175,19 @@ class get_data:
 
                 if cv2.waitKey(115) == ord('s'):
                     # self.RGB()
-                    print("pressed s")
+                    global r
+                    r = False
+                    color_frame = frames.get_color_frame()
+                    self.getColorImage(color_frame)
+                    # RGB-D
+                    global d
+                    d = False
+                    depth_frame = frames.get_depth_frame()
+                    self.getDepthImage(depth_frame)
+                    print("Saved")
 
+                if cv2.waitKey(113) == ord('q'):
+                    break
 
         finally:
 
